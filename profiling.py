@@ -1416,7 +1416,11 @@ def show_profiling_page(df_main=None):
         df = df[df["Equipe"].astype(str) == sel_equipe]
 
     # 2. Création des 3 onglets
-    tab_indiv, tab_team, tab_comp, tab_evol, tab_cluster, tab_classement, tab_rapport, tab_export = st.tabs(["PROFIL INDIVIDUEL", "ANALYSE COLLECTIVE", "COMPARATEUR", "ÉVOLUTION LONGITUDINALE", "PROFILS DE JOUEURS (IA)", "CLASSEMENT", "RAPPORT", "EXPORT"])
+    # Version "Board" (09/2026) : uniquement les 3 onglets essentiels pour
+    # un affichage type board/vestiaire -- Évolution/Profils IA/Classement/
+    # Rapport/Export retirés de cette version allégée (toujours présents
+    # dans l'appli complète, ce fichier est une copie dédiée).
+    tab_indiv, tab_team, tab_comp = st.tabs(["PROFIL INDIVIDUEL", "ANALYSE COLLECTIVE", "COMPARATEUR"])
     
     # -- ONGLET 1 : INDIVIDUEL --
     @st.fragment
@@ -3210,49 +3214,12 @@ def show_profiling_page(df_main=None):
 
             _render_tab_team()
 
-        with tab_evol:
-            @st.fragment
-            def _render_tab_evol():
-                show_evolution_page(df)
-            _render_tab_evol()
-
         with tab_comp:
             @st.fragment
             def _render_tab_comp():
                 df_comp, source_comp = load_data()
                 show_comparateur_page(df_comp)
             _render_tab_comp()
-
-        with tab_cluster:
-            @st.fragment
-            def _render_tab_cluster():
-                show_clustering_page(df)
-            _render_tab_cluster()
-
-        # Dans profiling.py
-        with tab_classement:
-            @st.fragment
-            def _render_tab_classement():
-                show_classement_page(df)
-            _render_tab_classement()
-
-        with tab_rapport:
-            @st.fragment
-            def _render_tab_rapport():
-                # df_toutes_equipes (pas `df`, filtré sur 1 équipe par le
-                # sélecteur global) : voir le commentaire à sa définition.
-                show_rapport_page(df_toutes_equipes)
-            _render_tab_rapport()
-
-        with tab_export:
-            @st.fragment
-            def _render_tab_export():
-                # df_toutes_equipes : l'export doit pouvoir couvrir toutes
-                # les équipes en une fois (ex: "le poids de tous les
-                # joueurs"), pas seulement celle du sélecteur global.
-                from export_page import show_export_page
-                show_export_page(df_toutes_equipes)
-            _render_tab_export()
 
     # Attribution discrète en bas de page (demande 09/2026 : ne plus
     # afficher le nom en haut de l'appli, seulement "Département
