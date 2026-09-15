@@ -19,7 +19,12 @@ import plotly.graph_objects as go
 from utils import SDR_RED, load_data, get_kpi_card_html
 
 from team_profiling import show_team_page, get_poste_large
-from clustering import show_clustering_page
+# clustering / evolution / rapport_page / classement / export_page : PAS
+# importés ici -- version Board (09/2026), ces 5 onglets n'existent pas
+# dans cette version allégée (voir st.tabs plus bas, 3 onglets seulement).
+# Les retirer complètement (pas juste ne pas les appeler) évite tout leur
+# coût d'import au démarrage, notamment matplotlib/scipy via rapport_page
+# et clustering, jamais utilisés ici.
 
 from config_rapport import OFFICIAL_STRUCTURE, TEAM_STRUCTURE, REPORT_NORMES, REPORT_NORMES_PAR_POSTE, UNITS, RELATIVE_NORM_KEYS
 from data_utils import (
@@ -28,13 +33,8 @@ from data_utils import (
     last_valid_value,
 )
 
-# ajouts en cours 
-from evolution import show_evolution_page
 from comparateur import show_comparateur_page, get_best_season_record_paired
 from charts import build_radar
-from rapport_page import show_rapport_page
-# Trouve la zone des imports en haut de profiling.py et ajoute :
-from classement import show_classement_page
 from glossary import annotate_glossary_terms
 import glob
 
