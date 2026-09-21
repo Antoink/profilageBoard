@@ -48,7 +48,7 @@ jobs:
           from playwright.sync_api import sync_playwright
           import sys
 
-          URL = "https://profilagev8.streamlit.app"
+          URL = "https://profilagebv8.streamlit.app"
 
           with sync_playwright() as p:
               browser = p.chromium.launch()
