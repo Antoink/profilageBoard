@@ -63,11 +63,13 @@ def check_password():
     # fixed, pas dans la colonne centrale étroite du formulaire) -- demande
     # 09/2026 : en bas à droite, le widget "Manage app" de Streamlit Cloud
     # passe par-dessus et le cache -- déplacé à gauche pour rester visible.
-    st.markdown(
-        "<div style='position:fixed; bottom:10px; left:16px; font-size:9px; "
-        "color:#bbb; z-index:9999;'>développé par Antoine Kaczmarek</div>",
-        unsafe_allow_html=True,
-    )
+    # MASQUÉE À L'AFFICHAGE (demande 09/2026) : gardée en commentaire dans
+    # le code (preuve de paternité/protection), simplement plus rendue.
+    # st.markdown(
+    #     "<div style='position:fixed; bottom:10px; left:16px; font-size:9px; "
+    #     "color:#bbb; z-index:9999;'>développé par Antoine Kaczmarek</div>",
+    #     unsafe_allow_html=True,
+    # )
 
     return False
 
